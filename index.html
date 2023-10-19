@@ -17,27 +17,76 @@
         </ul>
     </nav>
     <main>
-        <div class="sidebar">
-            <nav class="sidebar">
-                <ul class="sidebar__menu">
-                    <li class="sidebar__menu__item"><a href="#">Day Supply</a></li>
-                    <li class="sidebar__menu__item"><a href="#">Mg/Ml Conversion</a></li>
-                </ul>
-            </nav>
-        </div>
         <div class="calculator">
-            <h2 class="calc__title">Day Supply Calculator</h2>
-            <ul class="calc__menu">
-                <li class="calc__item"><label for="drugType">Drug Type:</label>
-                <select name="drugType" id="drugType">
-                    <option value="suspension">Suspension</option>
-                    <option value="injectable">Injectable</option>
-                </select></li>
-                <li class="calc__item">
-                    
-                </li>
-            </ul>
+            <h2 class="calc__title" style="font-size: 34em;"></h2><strong>Day Supply Calculator</strong></h2>
         </div>
+    <!--addEventListener async to input-->
+    <div class="mainContainer" width='800' height='600' style="
+        max-width: 1200px;
+        max-height: 800px;
+        width: 100vw;
+        height: 85vh;
+        margin: 3px;
+        padding: 3px;
+        border: 1px solid black;
+        justify-content: center;
+        ">
+        <div class="topPaneBox" style="
+            justify-content: center;
+            flex-direction: column;
+            flex-wrap: wrap;
+            float: top;
+            margin: 3px;
+            padding: 3px;
+            width: 98%;
+            height: 14%;
+            border: 1px solid black;
+        ">
+        <p><mark>top pane box</mark></p>
+        <input id="inputSearchDrug" type='text' style="height: 34px; font-size: medium;" placeholder="search for your drug"></input>
+        <ul class="calc__menu">
+            <li class="calc__item"><label for="drugType">Drug Type:</label>
+            <select name="drugType" id="drugType">
+                <option value="suspension">Suspension</option>
+                <option value="injectable">Injectable</option>
+            </select></li>
+            <li class="calc__item">
+            </li>
+        </ul>
+        </div>
+        <div class="leftPaneBox" style="
+            flex-direction: column;
+            flex-wrap: nowrap;
+            float: left;
+            margin: 3px;
+            padding: 3px;
+            width: 32%;
+            height: 85%;
+            border: 1px solid black;
+            ">
+            <p><mark>leftPaneBox</mark></p>
+            <div class="sidebar">
+                <nav class="sidebar">
+                    <ul class="sidebar__menu">
+                        <li class="sidebar__menu__item"><a href="#">Day Supply</a></li>
+                        <li class="sidebar__menu__item"><a href="#">Mg/Ml Conversion</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="rightPaneBox" style="
+            flex-direction: column;
+            flex-wrap: nowrap;
+            float: left;
+            margin: 3px;
+            padding: 3px;
+            width: 66%;
+            height: 85%;
+            border: 1px solid black;
+            ">
+            <p><mark>rightPaneBox</mark></p>
+        </div>
+    </div>
     </main>
 </body>
 </html>
