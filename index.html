@@ -3,33 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RxCalc</title>
-    <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/style.css">
     <script src="https://kit.fontawesome.com/5c51baed2a.js" crossorigin="anonymous"></script>
-    <script src="scripts/app.js"></script>
+    <title>Nav Bars</title>
 </head>
 <body>
-    <header class="header__main">
-        <div class="header__main__box">
-            <!--
-            <a href="index.html"><img src="images/svg/logo-no-background.svg" alt="Home"></a>
-            -->
-            <nav class="header__main__nav">
-                <ul>
-                    <li><a href="index.html">
-                        <i class="fa-solid fa-calculator"></i> RxCalc <i class="fa-solid fa-pills"></i></a></li>
-                    <li><a href="about.html">About us</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Buy us a coffee!</a></li>
+    <nav class="navbar">
+        <ul class="navbar__menu">
+            <li class="navbar__menu__logo"><a href="index.html"><i class="fa-solid fa-calculator"></i> RxCalc <i class="fa-solid fa-pills"></i></a></li></a></li>
+            <li class="navbar__menu__item"><a href="#">About Us</a></li>
+            <li class="navbar__menu__item"><a href="#">Contact Us</a></li>
+            <li class="navbar__menu__gitlink"><a href="https://github.com/kayshwii/rxcalc"><i class="fa-brands fa-square-github fa-4x"></i></a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="sidebar">
+            <nav class="sidebar">
+                <ul class="sidebar__menu">
+                    <li class="sidebar__menu__item"><a href="#">Day Supply</a></li>
+                    <li class="sidebar__menu__item"><a href="#">Mg/Ml Conversion</a></li>
                 </ul>
             </nav>
         </div>
-        <div class="header__main__git">
-            <a href="https://github.com/kayshwii/rxcalc"><i class="fa-brands fa-square-github fa-4x"></i></a>
+        <div class="calculator">
+            <h2 class="calc__title">Day Supply Calculator</h2>
+            <ul class="calc__menu">
+                <li class="calc__item"><label for="drugType">Drug Type:</label>
+                <select name="drugType" id="drugType">
+                    <option value="suspension">Suspension</option>
+                    <option value="injectable">Injectable</option>
+                </select></li>
+                <li class="calc__item">
+                    
+                </li>
+            </ul>
         </div>
-    </header>
-    </div>
-    
+    </main>
 </body>
 </html>
