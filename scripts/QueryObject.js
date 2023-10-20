@@ -2,7 +2,7 @@ const defaultProps =
 {
 
 }
-//flatten data structure by one
+//flatten data structure 
 export class QueryObject
 {
     constructor(props)

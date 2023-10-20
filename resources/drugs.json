@@ -29,6 +29,13 @@
         "adminRoute": ["inject", "subcutaneously"]
     },
     {
+        "name" : "killer mounjaro",
+        "form" : "units",
+        "doseStrength" : ["2mg/0.5mL","4mg/0.5mL","6mg/0.5mL","8mg/0.5mL"],
+        "pkSize": ["4","1"],
+        "adminRoute": ["inject", "subcutaneously"]
+    },
+    {
         "name" : "tresiba",
         "form" : "units",
         "doseStrength" : ["100units/mL", "200units/mL", "300units/mL"],

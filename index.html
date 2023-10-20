@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles/style.css">
     <script src="https://kit.fontawesome.com/5c51baed2a.js" crossorigin="anonymous"></script>
     <script src="./scripts/QueryObject.js" type="module"></script>
-    <script src="./scripts/main.js" type="module"></script>
+    <script src="./scripts/main.js" type="module" async></script>
     <title>Nav Bars</title>
 </head>
 <body>
@@ -20,23 +20,22 @@
     </nav>
     <main>
         <div class="calculator">
-            <h2 class="calc__title" style="font-size: 34em;"></h2><strong>Day Supply Calculator</strong></h2>
+            <h2 class="calc__title" style="font-size: 34em;"></h2><strong></strong></h2>
         </div>
     <!--addEventListener async to input-->
-    <div class="mainContainer" width='800' height='600' style="
+    <div class="mainContainer" width='' height='' style="
         max-width: 1200px;
         max-height: 800px;
         width: 100vw;
-        height: 85vh;
+        height: 91vh;
         margin: 3px;
         padding: 3px;
         border: 1px solid black;
-        justify-content: center;
         ">
         <div class="topPanelBox" style="
             justify-content: center;
             flex-direction: column;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             float: top;
             margin: 3px;
             padding: 3px;
@@ -44,7 +43,7 @@
             height: 14%;
             border: 1px solid black;
         ">
-        <p><mark>topPanelBox</mark></p>
+        <p id="topPanelBoxLabel"><mark>topPanelBox</mark></p>
         <form action="./index.html" method="get">
             <input id="inputSearchDrug" type='text' style="height: 34px; font-size: medium;" placeholder="search for your drug"></input>
             <select id="drugNames" class="choices" jsonName="name"></select>
@@ -58,10 +57,10 @@
                 <option value="4">QID: Four times daily</option>
                 <option value="5">5xD: Five times daily</option>
             </select>
-            <input id="daySupply" class="choices" name="days" value="" size="3" maxlength="3" placeholder="days" length="5"></input>
+            <input id="daySupply" class="choices" name="days"type="number" value="" size="3" maxlength="3" placeholder="days" length="5"></input>
             <ul class="calc__menu">
                 <li class="calc__item"><label for="drugType">Drug Type:</label>
-                <select name="drugType" id="drugType">
+                <select name="drugType" id="drugType" class="choices">
                     <option value="suspension">Suspension</option>
                     <option value="injectable">Injectable</option>
                 </select></li>
@@ -74,6 +73,7 @@
         <div class="leftPanelBox" style="
             flex-direction: column;
             flex-wrap: nowrap;
+            flex-flow: nowrap;
             float: left;
             margin: 3px;
             padding: 3px;
@@ -94,6 +94,7 @@
         <div class="rightPanelBox" style="
             flex-direction: column;
             flex-wrap: nowrap;
+            flex-flow: nowrap;
             float: left;
             margin: 3px;
             padding: 3px;
