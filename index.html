@@ -45,16 +45,31 @@
             border: 1px solid black;
         ">
         <p><mark>topPanelBox</mark></p>
-        <input id="inputSearchDrug" type='text' style="height: 34px; font-size: medium;" placeholder="search for your drug"></input>
-        <ul class="calc__menu">
-            <li class="calc__item"><label for="drugType">Drug Type:</label>
-            <select name="drugType" id="drugType">
-                <option value="suspension">Suspension</option>
-                <option value="injectable">Injectable</option>
-            </select></li>
-            <li class="calc__item">
-            </li>
-        </ul>
+        <form action="./index.html" method="get">
+            <input id="inputSearchDrug" type='text' style="height: 34px; font-size: medium;" placeholder="search for your drug"></input>
+            <select id="drugNames" class="choices" jsonName="name"></select>
+            <select id="doseStrengths" class="choices" jsonName="doseStrength"> </select>
+            <select id="pkSizes" class="choices" jsonName="pkSize"> </select>
+            <select id="doses" class="choices" jsonName="dose"> </select>
+            <select id="frequencies" class="freq" jsonName="frequency">
+                <option value="1">QD: Once daily</option>
+                <option value="2">BID: Twice daily</option>
+                <option value="3">TID: Three times daily</option>
+                <option value="4">QID: Four times daily</option>
+                <option value="5">5xD: Five times daily</option>
+            </select>
+            <input id="daySupply" class="choices" name="days" value="" size="3" maxlength="3" placeholder="days" length="5"></input>
+            <ul class="calc__menu">
+                <li class="calc__item"><label for="drugType">Drug Type:</label>
+                <select name="drugType" id="drugType">
+                    <option value="suspension">Suspension</option>
+                    <option value="injectable">Injectable</option>
+                </select></li>
+                <li class="calc__item">
+                </li>
+            </ul>
+        <input type="submit" value="Submit"></input>
+        </form>
         </div>
         <div class="leftPanelBox" style="
             flex-direction: column;

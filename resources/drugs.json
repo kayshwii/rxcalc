@@ -4,25 +4,42 @@
         "name" : "amox",
         "form" : "mL",
         "doseStrength" : ["400mg/5mL", "250mg/5mL"],
-        "pkSize": ["100", "75", "50"]
+        "pkSize": ["100", "75", "50"],
+        "adminRoute": ["take", "by mouth"]
     },
     {
         "name" : "amox/clav",
         "form" : "mL",
         "doseStrength" : ["200mg/5mL", "400mg/5mL", "600mg/5mL"],
-        "pkSize": ["100", "75", "50"]
+        "pkSize": ["100", "75", "50"],
+        "adminRoute": ["take", "by mouth"]
     },
     {
         "name" : "azithromycin",
         "form" : "mL",
         "doseStrength" : ["100mg/5mL", "200mg/5mL"],
-        "pkSize": ["13", "23", "30"]
+        "pkSize": ["13", "23", "30"],
+        "adminRoute": ["take", "by mouth"]
+    },
+    {
+        "name" : "lantus",
+        "form" : "units",
+        "doseStrength" : ["100units/mL"],
+        "pkSize": ["15","3", "6", "9"],
+        "adminRoute": ["inject", "subcutaneously"]
     },
     {
         "name" : "tresiba",
         "form" : "units",
         "doseStrength" : ["100units/mL", "200units/mL", "300units/mL"],
-        "pkSize": ["15","3", "6", "9"]
+        "pkSize": ["15","3", "6", "9"],
+        "adminRoute": ["inject", "subcutaneously"]
+    },
+    {
+        "name" : "toujeo",
+        "form" : "units",
+        "doseStrength" : ["100units/mL", "200units/mL", "300units/mL"],
+        "pkSize": ["15","3", "6", "9"],
+        "adminRoute": ["inject", "subcutaneously"]
     }]
-
 }
