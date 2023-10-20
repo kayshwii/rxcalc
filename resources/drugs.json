@@ -1,0 +1,28 @@
+{
+    "drugs":
+    [{
+        "name" : "amox",
+        "form" : "mL",
+        "doseStrength" : ["400mg/5mL", "250mg/5mL"],
+        "pkSize": ["100", "75", "50"]
+    },
+    {
+        "name" : "amox/clav",
+        "form" : "mL",
+        "doseStrength" : ["200mg/5mL", "400mg/5mL", "600mg/5mL"],
+        "pkSize": ["100", "75", "50"]
+    },
+    {
+        "name" : "azithromycin",
+        "form" : "mL",
+        "doseStrength" : ["100mg/5mL", "200mg/5mL"],
+        "pkSize": ["13", "23", "30"]
+    },
+    {
+        "name" : "tresiba",
+        "form" : "units",
+        "doseStrength" : ["100units/mL", "200units/mL", "300units/mL"],
+        "pkSize": ["15","3", "6", "9"]
+    }]
+
+}
