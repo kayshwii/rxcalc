@@ -13,7 +13,6 @@ export class QueryObject
             ...props
         }
         this.arr = new Array();
-        this.json = props.json;
         this.index = props.index;
 
         this.name = props.name;

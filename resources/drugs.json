@@ -31,7 +31,7 @@
     {
         "name" : "killer mounjaro",
         "form" : "units",
-        "doseStrength" : ["2mg/0.5mL","4mg/0.5mL","6mg/0.5mL","8mg/0.5mL"],
+        "doseStrength" : ["2mg/0.5mL","4mg/0.5mL","8mg/0.5mL"],
         "pkSize": ["4","1"],
         "adminRoute": ["inject", "subcutaneously"]
     },

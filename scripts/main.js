@@ -1,54 +1,34 @@
 import QueryObject from "./QueryObject.js";
 
-//vars
-let input = document.querySelector("#inputSearchDrug");
-input.addEventListener("selectionchange", (evt) => 
-{
-    document.querySelector("#topPanelBoxLabel").innerHTML= (evt.target.value)
-})
-let choices = document.getElementsByClassName("choices");
-for(let i=0; i<choices.length; ++i)
-{
-}
-let props =
-{
-    name: choices["drugNames"].value,
-    doseStrength: choices["doseStrengths"].value,
-    pkSize: choices["pkSizes"].value,
-    daySupply: choices["daySupply"].value,
-    drugType: choices["drugType"].value
-}
-console.log(props);
-function assignSelectionValue(evt) 
-{
-    selectedChoice = evt.target.id;
-    console.log(selectedChoice);
-    targetId = document.querySelector(evt.target.id)
-    props.name = targetId; 
-}
-
-let choice = choices["drugNames"];
+//debug vars
 
 //json functions--------------------------------------------------
-//main
+//main--------------------------------------------------
+document.addEventListener("DOMContentLoaded", () =>{jsonDataUri()});
 async function jsonDataUri()
 {
+    //vars
     const requrl = "./resources/drugs.json";
     const request = new Request(requrl);
     const response = await fetch(request);
     const drugsJson = await response.json();
-    choices["drugNames"].addEventListener("change", (evt) => 
+    let choices = document.getElementsByClassName("choices");
+
+    document.querySelector("#inputSearchDrug").addEventListener("selectionchange", (evt) => 
     {
         document.querySelector("#topPanelBoxLabel").innerHTML= (evt.target.value)
+    })
+    choices["drugNames"].addEventListener("change", (evt) => 
+    {
+        document.querySelector("#topPanelBoxLabel").innerHTML= (evt.target.value);
         printHtmlJsonData(drugsJson, choices["drugNames"].value);
     })
-    mapJsonNameChoices(drugsJson);
-    mapJsonChoices(drugsJson, choices["drugNames"].value);
-    createQueryObj();
+    mapJsonNameChoices(drugsJson, choices);
+    createQueryObj(drugsJson, choices);
     //printHtmlJsonData(drugsJson, choices["drugNames".value]);
 }
 //functions--------------------------------------------------
-function mapJsonNameChoices(json)
+function mapJsonNameChoices(json, choices)
 {
    //console.log(json.drugs[name]);
     for(let i=0; i<json.drugs.length; ++i)
@@ -59,8 +39,9 @@ function mapJsonNameChoices(json)
         choices["drugNames"].appendChild(choice);
     }
 }
-function mapJsonChoices(json, name)
+function mapJsonChoices(json, choices)
 {
+    let name = choices["drugNames"].value;
     for(let i=1; i<choices.length; ++i)
     {
         for(let j=0; j<json.length; ++j)
@@ -72,24 +53,33 @@ function mapJsonChoices(json, name)
         }
     }
 }
-function createQueryObj()
+function createQueryObj(json, choices)
 {
-
+    mapJsonChoices(json, choices);
+    let props =
+    {
+        name: choices["drugNames"].value,
+        doseStrength: choices["doseStrengths"].value,
+        pkSize: choices["pkSizes"].value,
+        daySupply: choices["daySupply"].value,
+        drugType: choices["drugType"].value,
+    }
+    for(let i=0; i<choices.length; ++i)
+    {
+    }
+    let query = new  QueryObject({props});
+    console.log(query.name);
 }
-function printHtmlJsonData(json, queryName)
+function printHtmlJsonData(json, query)
 {
-    let index = queryName;
     let rPanel= document.querySelector(".rightPanelBox");
-    let h1 = document.createElement("h1");
     let drugs = json.drugs;
-    console.log(drugs.filter((x) => {if(x.name==queryName) return x}).pop().name);
-    //h1.textContent = "Name: " + drugs[index].name + " Strength: " + drugs[index].doseStrength + " Pack Size: " + drugs[index].pkSize + drugs[index].form;
-    h1.textContent = "Name: " + drugs.filter((x) => {if(x.name==queryName) return x}).pop().name + " " +
-                    "Strength: " + drugs.filter((x) => {if(x.name==queryName) return x}).pop().doseStrength + " " +
-                    "Pk Size: " + drugs.filter((x) => {if(x.name==queryName) return x}).pop().pkSize + " " 
+    rPanel.innerHTML = "Name: " + drugs.filter((x) => {if(x.name==query) return x}).pop().name + "</br> " +
+                    "Strength: " + drugs.filter((x) => {if(x.name==query) return x}).pop().doseStrength
+                                        .filter((x) => {if(x.doseStrength==query.doseStrength) return x}).pop() + "</br> " +
+                    "Pk Size: " + drugs.filter((x) => {if(x.name==query) return x}).pop().pkSize
+                                        .filter((x) => {if(x.pkSize==query.pkSize) return x}).pop() + "</br> " 
                     ;
-    rPanel.appendChild(h1);
 }
 
 //let query = new QueryObject(props)
-jsonDataUri();
