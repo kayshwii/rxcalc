@@ -3,7 +3,7 @@
     [{
         "name" : "amox",
         "form" : "mL",
-        "doseStrength" : ["400mg/5mL", "250mg/5mL"],
+        "doseStrength" : ["250mg/5mL", "400mg/5mL"],
         "pkSize": ["100", "75", "50"],
         "adminRoute": ["take", "by mouth"]
     },

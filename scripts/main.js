@@ -13,24 +13,29 @@ async function jsonDataUri()
     const response = await fetch(request);
     const drugsJson = await response.json();
     let choices = document.getElementsByClassName("choices");
+    let query = new QueryObject(); 
 
     document.querySelector("#inputSearchDrug").addEventListener("selectionchange", (evt) => 
     {
         document.querySelector("#topPanelBoxLabel").innerHTML= (evt.target.value)
-    })
+    });
     choices["drugNames"].addEventListener("change", (evt) => 
     {
         document.querySelector("#topPanelBoxLabel").innerHTML= (evt.target.value);
-        printHtmlJsonData(drugsJson, choices["drugNames"].value);
-    })
+        mapJsonDoseStrengthChoices(getQueryName(drugsJson, query));
+        printHTMLJsonData(drugsJson, choices["drugNames"].value);
+    });
+    choices["doseStrengths"].addEventListener("change", (evt) => 
+    {
+        document.querySelector("#topPanelBoxLabel").innerHTML= (choices["drugNames"].value + " " + evt.target.value);
+        //mapJsonPkSizeChoices(json, query);
+        printHTMLJsonData(drugsJson, choices["drugNames"].value, choices["doseStrengths"].value);
+    });
     mapJsonNameChoices(drugsJson, choices);
-    createQueryObj(drugsJson, choices);
-    //printHtmlJsonData(drugsJson, choices["drugNames".value]);
-}
+    //createQueryObj(choices);
 //functions--------------------------------------------------
 function mapJsonNameChoices(json, choices)
 {
-   //console.log(json.drugs[name]);
     for(let i=0; i<json.drugs.length; ++i)
     {
         let choice = document.createElement("option");
@@ -39,23 +44,66 @@ function mapJsonNameChoices(json, choices)
         choices["drugNames"].appendChild(choice);
     }
 }
-function mapJsonChoices(json, choices)
+function mapJsonDoseStrengthChoices(query)
 {
-    let name = choices["drugNames"].value;
-    for(let i=1; i<choices.length; ++i)
+    if(choices["drugNames"].value == query["name"])
     {
-        for(let j=0; j<json.length; ++j)
+        choices['doseStrengths'].innerHTML = "";
+        for(let i=0; i<query["doseStrength"].length; ++i)
         {
-            let prop = (choices[i].attributes.jsonname.value);
             let choice = document.createElement("option");
-            choice.textContent = json.drugs[name];
-            choices[i].appendChild(choice);
+            choice.value = query["doseStrength"][i];
+            choice.textContent = query["doseStrength"][i];
+            choices['doseStrengths'].appendChild(choice);
         }
+    //    if(choices["drugNames"].value)
+    //    {
+    //        choices['pkSizes'].innerHTML = "";
+    //        for(let i=0;i<choices.length; ++i)
+    //        {
+    //            let choice = document.createElement('option');
+    //            choice.value = json.drugs[i].pkSize;
+    //            choice.textContent = json.drugs["pkSize"];
+    //            choices['pkSizes'].appendChild(choice);
+    //        }
+    //    }
+    //    if(choices["pkSizes"].value)
+    //    {
+    //        for(let i=0;i<choices.length; ++i)
+    //        {
+    //            let choice = document.createElement('option');
+    //            choice.textContent = json.drugs["form"];
+    //            choices[i].appendChild(choice); 
+    //        }
+    //    }
     }
 }
-function createQueryObj(json, choices)
+//getters--------------------------------------------------
+function getQueryName(json, queryName)
 {
-    mapJsonChoices(json, choices);
+    for(let i=0; i<choices["drugNames"].length; ++i)
+    {
+        if(choices["drugNames"].value == json["drugs"][i].name)
+        {
+            queryName = json["drugs"][i]; 
+        }
+    }
+    return queryName;
+}
+function getQueryDoseStrength(json, queryDoseStrength)
+{
+    for(let i=0; i<choices["doseStrengths"].length; ++i)
+    {
+        if(choices["doseStrengths"].value == json["drugs"][i].doseStrength)
+        {
+            queryDoseStrength = json["doseStrengths"][i]; 
+        }
+    }
+    return queryDoseStrength;
+
+}
+function createQueryObj(choices)
+{
     let props =
     {
         name: choices["drugNames"].value,
@@ -67,19 +115,22 @@ function createQueryObj(json, choices)
     for(let i=0; i<choices.length; ++i)
     {
     }
-    let query = new  QueryObject({props});
-    console.log(query.name);
 }
-function printHtmlJsonData(json, query)
+//print--------------------------------------------------
+function printHTMLJsonData(json, queryName, queryDoseStrength)
 {
     let rPanel= document.querySelector(".rightPanelBox");
-    let drugs = json.drugs;
-    rPanel.innerHTML = "Name: " + drugs.filter((x) => {if(x.name==query) return x}).pop().name + "</br> " +
-                    "Strength: " + drugs.filter((x) => {if(x.name==query) return x}).pop().doseStrength
-                                        .filter((x) => {if(x.doseStrength==query.doseStrength) return x}).pop() + "</br> " +
-                    "Pk Size: " + drugs.filter((x) => {if(x.name==query) return x}).pop().pkSize
+    let drugs = json["drugs"];
+    console.log(queryDoseStrength)
+    rPanel.innerHTML = 
+                    "Name: " + drugs.filter((x) => {if(x.name==queryName) return x}).pop().name + "</br> " +
+                    "Strength: " + drugs.filter((x) => {if(x.name==queryName) return x}).pop().doseStrength
+                                        .filter((x) => {if(x==queryDoseStrength) return x}).pop() + "</br> " +
+                    "Pk Size: " + drugs.filter((x) => {if(x.name==queryName) return x}).pop().pkSize
                                         .filter((x) => {if(x.pkSize==query.pkSize) return x}).pop() + "</br> " 
                     ;
 }
+}
+
 
 //let query = new QueryObject(props)

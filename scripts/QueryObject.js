@@ -13,18 +13,19 @@ export class QueryObject
             ...props
         }
         this.arr = new Array();
-        this.index = props.index;
 
-        this.name = props.name;
-        this.doseStrength = props.doseStrength;
-        this.pkSize = props.pkSize;
-        this.daySupply = props.daySupply;
-        this.frequency = props.frequency;
+        this.name = this.props.name;
+        this.doseStrength = this.props.doseStrength;
+        this.pkSize = this.props.pkSize;
+        this.daySupply = this.props.daySupply;
+        this.drugType = this.props.drugType;
+        this.frequency = this.props.frequency;
+        this.qty = this.props.qty;
+        this.form = this.props.form;
+        this.adminRoute = this.props.adminRoute;
     }
     createOptionArr()
     {
-        this.opt = document.createElement("option");
-        this.opt.append(document.createElement('ul'))
     }
     generateSig()
     {
