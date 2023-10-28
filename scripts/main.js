@@ -14,16 +14,41 @@ async function jsonDataUri()
     const drugsJson = await response.json();
     let choices = document.getElementsByClassName("choices");
     let query = new QueryObject(); 
-
-    document.querySelector("#inputSearchDrug").addEventListener("selectionchange", (evt) => 
-    {
-        document.querySelector("#topPanelBoxLabel").innerHTML= (evt.target.value)
-    });
+//eventlisteners--------------------------------------------------
     choices["drugNames"].addEventListener("change", (evt) => 
     {
+        //document.querySelector("#topPanelBoxLabel").innerHTML= document.querySelector("#topPanelBoxLabel").options[document.querySelector("#topPanelBoxLabel").selectedIndex].text;
         document.querySelector("#topPanelBoxLabel").innerHTML= (evt.target.value);
         mapJsonDoseStrengthChoices(getQueryName(drugsJson, query));
         printHTMLJsonData(drugsJson, choices["drugNames"].value);
+        choices["doseStrengths"].addEventListener("select", selectEvtDoseStrength, "once");
+    });
+    document.querySelector("#inputSearchDrug").addEventListener("selectionchange", (evt) => 
+    {
+        //document.querySelector("#topPanelBoxLabel").innerHTML= (evt.target.value)
+        let regex;
+        let regexFilter = new RegExp("(\^[a-zA-Z]{1,9})");
+
+        try
+        {
+            if(regexFilter.exec(evt.target.value) !== null)
+                {regex = new RegExp("\^" + evt.target.value);
+                console.log(regex);}
+        }
+        catch(err)
+        {
+        }
+        let regQuery = (drugsJson.drugs.filter((x) => {if(regex.exec(x.name) !== null) return x;}));
+        document.querySelector("#drugNameDataList").innerHTML = '';
+        for(let i=0; evt.target.value.length>0 && i<regQuery.length && i<6; ++i)
+        {
+            let choice = document.createElement("option");
+            choice.value = regQuery[i].name;
+            document.querySelector("#drugNameDataList").appendChild(choice);
+        };
+        //if(regex.match(evt.target.value))
+        //{
+        //}
     });
     choices["doseStrengths"].addEventListener("change", (evt) => 
     {
@@ -31,6 +56,7 @@ async function jsonDataUri()
         //mapJsonPkSizeChoices(json, query);
         printHTMLJsonData(drugsJson, choices["drugNames"].value, choices["doseStrengths"].value);
     });
+
     mapJsonNameChoices(drugsJson, choices);
     //createQueryObj(choices);
 //functions--------------------------------------------------
@@ -49,7 +75,7 @@ function mapJsonDoseStrengthChoices(query)
     if(choices["drugNames"].value == query["name"])
     {
         choices['doseStrengths'].innerHTML = "";
-        for(let i=0; i<query["doseStrength"].length; ++i)
+        for(let i=-1; i<query["doseStrength"].length; ++i)
         {
             let choice = document.createElement("option");
             choice.value = query["doseStrength"][i];
@@ -78,6 +104,10 @@ function mapJsonDoseStrengthChoices(query)
     //    }
     }
 }
+function selectEvtDoseStrength()
+{
+
+}
 //getters--------------------------------------------------
 function getQueryName(json, queryName)
 {
@@ -100,7 +130,6 @@ function getQueryDoseStrength(json, queryDoseStrength)
         }
     }
     return queryDoseStrength;
-
 }
 function createQueryObj(choices)
 {
@@ -117,10 +146,14 @@ function createQueryObj(choices)
     }
 }
 //print--------------------------------------------------
-function printHTMLJsonData(json, queryName, queryDoseStrength)
+function printHTMLJsonData(json, queryName, queryDoseStrength, queryPkSize)
 {
     let rPanel= document.querySelector(".rightPanelBox");
     let drugs = json["drugs"];
+    //let queryName = query.name;
+    //let queryDoseStrength = query.doseStrength;
+    //let queryPkSize = query.pkSize;
+
     console.log(queryDoseStrength)
     rPanel.innerHTML = 
                     "Name: " + drugs.filter((x) => {if(x.name==queryName) return x}).pop().name + "</br> " +
@@ -132,5 +165,3 @@ function printHTMLJsonData(json, queryName, queryDoseStrength)
 }
 }
 
-
-//let query = new QueryObject(props)

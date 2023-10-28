@@ -40,25 +40,28 @@
             margin: 3px;
             padding: 3px;
             width: 98%;
-            height: 14%;
+            height: 24%;
             border: 1px solid black;
         ">
         <p id="topPanelBoxLabel"><mark>topPanelBox</mark></p>
         <form action="./index.html" method="get">
-            <input id="inputSearchDrug" type='text' style="height: 34px; font-size: medium;" placeholder="search for your drug"></input>
+            <input id="inputSearchDrug" list="drugNameDataList" type='text' pattern="[A-Za-z].{9}" style="height: 34px; font-size: medium;" length="10" placeholder="search for your drug">
+            <datalist id="drugNameDataList" class="inputDataList"></datalist>
+            </input>
             <select id="drugNames" class="choices" jsonName="name"></select>
             <select id="doseStrengths" class="choices" jsonName="doseStrength"> </select>
             <select id="pkSizes" class="choices" jsonName="pkSize"> </select>
             <select id="doses" class="choices" jsonName="dose"> </select>
             <select id="frequencies" class="freq" jsonName="frequency">
-                <option value="1">QD: Once daily</option>
-                <option value="2">BID: Twice daily</option>
-                <option value="3">TID: Three times daily</option>
-                <option value="4">QID: Four times daily</option>
-                <option value="5">5xD: Five times daily</option>
-                <option value="7">QW: Once Weekly</option>
+                <option value="1">QD: Once daily 一次每个天</option>
+                <option value="2">BID: Twice daily 二次每个天</option>
+                <option value="3">TID: Three times daily 三次每个天</option>
+                <option value="4">QID: Four times daily 四次每个天</option>
+                <option value="5">5xD: Five times daily 五次每个天</option>
+                <option value="7">QW: Once Weekly 一次每个星期</option>
             </select>
-            <input id="daySupply" class="choices" name="days"type="number" value="" size="3" maxlength="3" placeholder="days" length="5"></input>
+            <input id="daySupply" class="choices" name="days"type="number" value="" size="3" maxlength="3"  autocomplete="off" length="6"></input>
+            <label for="daySupply">Days</label>
             <ul class="calc__menu">
                 <li class="calc__item"><label for="drugType">Drug Type:</label>
                 <select name="drugType" id="drugType" class="choices">
@@ -76,10 +79,10 @@
             flex-wrap: nowrap;
             flex-flow: nowrap;
             float: left;
-            margin: 3px;
-            padding: 3px;
+            margin: 3px 2px;
+            padding: 3px 2px;
             width: 31%;
-            height: 85%;
+            height: 74%;
             border: 1px solid black;
             ">
             <p><mark>leftPanelBox</mark></p>
@@ -97,10 +100,10 @@
             flex-wrap: nowrap;
             flex-flow: nowrap;
             float: left;
-            margin: 3px;
-            padding: 3px;
+            margin: 3px 2px;
+            padding: 3px 2px;
             width: 66%;
-            height: 85%;
+            height: 74%;
             border: 1px solid black;
             ">
             <p><mark>rightPanelBox</mark></p>
