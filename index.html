@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles/style.css">
     <script src="https://kit.fontawesome.com/5c51baed2a.js" crossorigin="anonymous"></script>
     <script src="./scripts/QueryObject.js" type="module"></script>
-    <script src="./scripts/main.js" type="module" async></script>
+    <script src="./scripts/main.js" type="module" ></script>
     <title>Nav Bars</title>
 </head>
 <body>
@@ -41,11 +41,12 @@
             padding: 3px;
             width: 98%;
             height: 24%;
+            min-height: 10em;
             border: 1px solid black;
         ">
         <p id="topPanelBoxLabel"><mark>topPanelBox</mark></p>
         <form action="./index.html" method="get">
-            <input id="inputSearchDrug" list="drugNameDataList" type='text' pattern="[A-Za-z].{9}" style="height: 34px; font-size: medium;" length="10" placeholder="search for your drug">
+            <input id="inputSearchDrug" list="drugNameDataList" type='text' style="height: 34px; font-size: medium;" length="10" placeholder="search for your drug">
             <datalist id="drugNameDataList" class="inputDataList"></datalist>
             </input>
             <select id="drugNames" class="choices" jsonName="name"></select>

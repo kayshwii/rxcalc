@@ -4,7 +4,7 @@ import QueryObject from "./QueryObject.js";
 
 //json functions--------------------------------------------------
 //main--------------------------------------------------
-document.addEventListener("DOMContentLoaded", () =>{jsonDataUri()});
+document.addEventListener("DOMContentLoaded", async () => {await jsonDataUri()});
 async function jsonDataUri()
 {
     //vars
@@ -23,21 +23,15 @@ async function jsonDataUri()
         printHTMLJsonData(drugsJson, choices["drugNames"].value);
         choices["doseStrengths"].addEventListener("select", selectEvtDoseStrength, "once");
     });
-    document.querySelector("#inputSearchDrug").addEventListener("selectionchange", (evt) => 
+    document.querySelector("#inputSearchDrug").addEventListener("input", (evt) => 
     {
-        //document.querySelector("#topPanelBoxLabel").innerHTML= (evt.target.value)
+        document.querySelector("#topPanelBoxLabel").innerHTML= (evt.target.value)
         let regex;
         let regexFilter = new RegExp("(\^[a-zA-Z]{1,9})");
 
-        try
-        {
-            if(regexFilter.exec(evt.target.value) !== null)
-                {regex = new RegExp("\^" + evt.target.value);
-                console.log(regex);}
-        }
-        catch(err)
-        {
-        }
+        if(regexFilter.exec(evt.target.value) !== null)
+            {regex = new RegExp("\^" + evt.target.value);}
+
         let regQuery = (drugsJson.drugs.filter((x) => {if(regex.exec(x.name) !== null) return x;}));
         document.querySelector("#drugNameDataList").innerHTML = '';
         for(let i=0; evt.target.value.length>0 && i<regQuery.length && i<6; ++i)
@@ -46,6 +40,8 @@ async function jsonDataUri()
             choice.value = regQuery[i].name;
             document.querySelector("#drugNameDataList").appendChild(choice);
         };
+        choices["drugNames"].value = evt.target.value;
+        mapJsonDoseStrengthChoices(getQueryName(drugsJson, query));
         //if(regex.match(evt.target.value))
         //{
         //}

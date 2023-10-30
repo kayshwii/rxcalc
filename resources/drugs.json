@@ -9,7 +9,7 @@
         "adminRoute": ["take", "by mouth"]
     },
     {
-        "name" : "amoxicillin/clavunate",
+        "name" : "amoxicillin-clavunate",
         "form" : "mL",
         "doseStrength" : ["200mg/5mL", "400mg/5mL", "600mg/5mL"],
         "pkSize": ["100", "75", "50"],
@@ -51,7 +51,7 @@
         "adminRoute": ["inject", "subcutaneously"]
     },
     {
-        "name" : "lantus",
+        "name" : "lantus flexpen",
         "form" : "units",
         "doseStrength" : ["100units/mL"],
         "pkSize": ["15","3"],
@@ -65,21 +65,21 @@
         "adminRoute": ["inject", "subcutaneously"]
     },
     {
-        "name" : "novolin-N flexpen",
+        "name" : "novolin N flexpen",
         "form" : "units",
         "doseStrength" : ["100units/mL"],
         "pkSize": ["15","3"],
         "adminRoute": ["inject", "subcutaneously"]
     },
     {
-        "name" : "novolin-R flexpen",
+        "name" : "novolin R flexpen",
         "form" : "units",
         "doseStrength" : ["100units/mL"],
         "pkSize": ["15","3"],
         "adminRoute": ["inject", "subcutaneously"]
     },
     {
-        "name" : "novolin-70/30 flexpen",
+        "name" : "novolin 70-30 flexpen",
         "form" : "units",
         "doseStrength" : ["100units/mL"],
         "pkSize": ["15","3"],
@@ -93,7 +93,7 @@
         "adminRoute": ["inject", "subcutaneously"]
     },
     {
-        "name" : "novolog 70/30 flexpen",
+        "name" : "novolog 70-30 flexpen",
         "form" : "units",
         "doseStrength" : ["100units/mL"],
         "pkSize": ["15","3"],
