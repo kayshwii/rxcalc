@@ -7,7 +7,7 @@ import QueryObject from "./QueryObject.js";
 document.addEventListener("DOMContentLoaded", async () => {await jsonDataUri()});
 async function jsonDataUri()
 {
-    //vars
+    //vars--------------------------------------------------
     const requrl = "./resources/drugs.json";
     const request = new Request(requrl);
     const response = await fetch(request);
@@ -15,17 +15,9 @@ async function jsonDataUri()
     let choices = document.getElementsByClassName("choices");
     let query = new QueryObject(); 
 //eventlisteners--------------------------------------------------
-    choices["drugNames"].addEventListener("change", (evt) => 
-    {
-        //document.querySelector("#topPanelBoxLabel").innerHTML= document.querySelector("#topPanelBoxLabel").options[document.querySelector("#topPanelBoxLabel").selectedIndex].text;
-        document.querySelector("#topPanelBoxLabel").innerHTML= (evt.target.value);
-        mapJsonDoseStrengthChoices(getQueryName(drugsJson, query));
-        printHTMLJsonData(drugsJson, choices["drugNames"].value);
-        choices["doseStrengths"].addEventListener("select", selectEvtDoseStrength, "once");
-    });
     document.querySelector("#inputSearchDrug").addEventListener("input", (evt) => 
     {
-        document.querySelector("#topPanelBoxLabel").innerHTML= (evt.target.value)
+        //document.querySelector("#topPanelBoxLabel").innerHTML= (evt.target.value)
         let regex;
         let regexFilter = new RegExp("(\^[a-zA-Z]{1,9})");
 
@@ -46,11 +38,33 @@ async function jsonDataUri()
         //{
         //}
     });
+    document.querySelector("#resetSearch").addEventListener("onclick", () => 
+    {
+      document.querySelector("#inputSearchDrug").value = "";  
+      for(let i=0; i<choices.length; ++i)
+      {
+        choices[i].value = "";
+      }
+    });
+
+    choices["drugNames"].addEventListener("change", (evt) => 
+    {
+        //document.querySelector("#topPanelBoxLabel").innerHTML= document.querySelector("#topPanelBoxLabel").options[document.querySelector("#topPanelBoxLabel").selectedIndex].text;
+        document.querySelector("#topPanelBoxLabel").innerHTML= (evt.target.value);
+        mapJsonDoseStrengthChoices(getQueryName(drugsJson, query));
+        printHTMLJsonData(drugsJson, choices["drugNames"].value);
+        choices["doseStrengths"].addEventListener("select", selectEvtDoseStrength, "once");
+    });
     choices["doseStrengths"].addEventListener("change", (evt) => 
     {
-        document.querySelector("#topPanelBoxLabel").innerHTML= (choices["drugNames"].value + " " + evt.target.value);
-        //mapJsonPkSizeChoices(json, query);
+        document.querySelector("#topPanelBoxLabel").innerHTML = (choices["drugNames"].value + " " + evt.target.value);
+        mapJsonPkSizeChoices(getQueryName(drugsJson, query));
         printHTMLJsonData(drugsJson, choices["drugNames"].value, choices["doseStrengths"].value);
+    });
+    choices['pkSizes'].addEventListener('change', (evt) =>
+    {
+        document.querySelector('#topPanelBoxLabel').innerHTML = (choices['drugNames'].value + " " + choices['doseStrengths'].value + " Pack:" + evt.target.value + "" );
+        printHTMLJsonData(drugsJson, choices["drugNames"].value, choices["doseStrengths"].value, choices['pkSizes'].value);
     });
 
     mapJsonNameChoices(drugsJson, choices);
@@ -71,6 +85,7 @@ function mapJsonDoseStrengthChoices(query)
     if(choices["drugNames"].value == query["name"])
     {
         choices['doseStrengths'].innerHTML = "";
+        choices['pkSizes'].innerHTML = "";
         for(let i=-1; i<query["doseStrength"].length; ++i)
         {
             let choice = document.createElement("option");
@@ -78,26 +93,20 @@ function mapJsonDoseStrengthChoices(query)
             choice.textContent = query["doseStrength"][i];
             choices['doseStrengths'].appendChild(choice);
         }
-    //    if(choices["drugNames"].value)
-    //    {
-    //        choices['pkSizes'].innerHTML = "";
-    //        for(let i=0;i<choices.length; ++i)
-    //        {
-    //            let choice = document.createElement('option');
-    //            choice.value = json.drugs[i].pkSize;
-    //            choice.textContent = json.drugs["pkSize"];
-    //            choices['pkSizes'].appendChild(choice);
-    //        }
-    //    }
-    //    if(choices["pkSizes"].value)
-    //    {
-    //        for(let i=0;i<choices.length; ++i)
-    //        {
-    //            let choice = document.createElement('option');
-    //            choice.textContent = json.drugs["form"];
-    //            choices[i].appendChild(choice); 
-    //        }
-    //    }
+    }
+}
+function mapJsonPkSizeChoices(query)
+{
+    if(choices["drugNames"].value == query["name"])
+    {
+        choices["pkSizes"].innerHTML = "";
+        for(let i=-1; i<query["pkSize"].length;++i)
+        {
+            let choice = document.createElement("option");
+            choice.value = query["pkSize"][i];
+            choice.textContent = query["pkSize"][i];
+            choices['pkSizes'].appendChild(choice);
+        }
     }
 }
 function selectEvtDoseStrength()
@@ -150,14 +159,13 @@ function printHTMLJsonData(json, queryName, queryDoseStrength, queryPkSize)
     //let queryDoseStrength = query.doseStrength;
     //let queryPkSize = query.pkSize;
 
-    console.log(queryDoseStrength)
     rPanel.innerHTML = 
                     "Name: " + drugs.filter((x) => {if(x.name==queryName) return x}).pop().name + "</br> " +
                     "Strength: " + drugs.filter((x) => {if(x.name==queryName) return x}).pop().doseStrength
                                         .filter((x) => {if(x==queryDoseStrength) return x}).pop() + "</br> " +
-                    "Pk Size: " + drugs.filter((x) => {if(x.name==queryName) return x}).pop().pkSize
-                                        .filter((x) => {if(x.pkSize==query.pkSize) return x}).pop() + "</br> " 
-                    ;
+                    "Pack Size: " + drugs.filter((x) => {if(x.name==queryName) return x}).pop().pkSize
+                                        .filter((x) => {if(x==queryPkSize) return x}).pop() + "</br> " +
+                    "Form: " + drugs.filter((x) => {if(x.name==queryName) return x}).pop().form + "</br> ";
 }
 }
 
